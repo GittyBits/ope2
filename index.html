@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +14,19 @@
 
 </head>
 
+
 <body class="stackedit">
-  <div class="stackedit__html"><h1 id="oppe-2">Oppe 2!</h1>
+  <div class="stackedit__html">
+    <div style="position:sticky;top:0;z-index:999;background:#fafafa;border:1px solid #ddd;padding:12px 14px;margin-bottom:20px;border-radius:8px;">
+  <strong style="margin-right:10px;">Topics Overview:</strong>
+  <a href="#cloning" style="margin-right:14px;text-decoration:none;">Cloning (4)</a>
+  <a href="#generics--wildcards" style="margin-right:14px;text-decoration:none;">Generics &amp; Wildcards (5)</a>
+  <a href="#exception-handling" style="margin-right:14px;text-decoration:none;">Exception Handling (6)</a>
+    <a href="#streams" style="margin-right:14px;text-decoration:none;">Streams (4)</a>
+
+  <a href="#june-questions" style="margin-right:14px;text-decoration:none;">17th Aug Ques  (4)</a>
+</div>
+    <h1 id="oppe-2">Oppe 2!</h1>
 <h2 id="cloning">Cloning</h2>
 <p>Q1.<br>
 In an athletic meet, the athletes from each school should register for 1 relay event and 2 individual events. Complete the Java program that does the following: create a dummy athlete object, create object <code>a1</code> of type <code>Athlete</code> by cloning the dummy athlete object, create another object <code>a2</code> of type <code>Athlete</code> by cloning <code>a1</code>, and then update the chest number, and individual events of <code>a1</code> and <code>a2</code>.</p>
@@ -1606,6 +1618,486 @@ Write a Java program that, given as input <code>name</code>, <code>age</code> an
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<h1 id="june-questions">17 Aug Questions</h2>
+<p>Q1.</p>
+<h2 id="merge-employee-bills">Merge Employee Bills</h1>
+<p>You are tasked with merging the bill data of employees from two different months. Each employee has at most one bill per month. The goal is to merge the two sets of data and calculate the total bill amount for each employee. If an employee appears in both months, their bill amounts should be summed.</p>
+<ul>
+<li>
+<p><strong>Class <code>Employee</code></strong> has the following members:</p>
+<ul>
+<li>
+<p>Private instance variables <code>String name</code> and <code>int billAmount</code></p>
+</li>
+<li>
+<p>Constructor to initialize the instance variables.</p>
+</li>
+<li>
+<p>Method <code>addBillAmount(int additionalBill)</code> to add additional bill amounts.</p>
+</li>
+<li>
+<p>Method <code>toString()</code> to display the employee’s name and bill amount in the output format.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Class <code>Test</code></strong> has the following members:</p>
+<ul>
+<li>
+<p>Method <code>mergeEmployeeBills</code> accepts two maps (<code>billMap1</code> and <code>billMap2</code>) of employee data, where the key is the employee’s ID and the value is an <code>Employee</code> object.</p>
+</li>
+<li>
+<p>It merges the two maps into a single map (<code>totalBills</code>), combining the bill amounts of employees who appear in both maps.</p>
+</li>
+<li>
+<p>The main method should:</p>
+<ul>
+<li>
+<p>Accept user input for the employee data for two months.</p>
+</li>
+<li>
+<p>For each employee, the input contains the employee’s ID, name, and bill amount.</p>
+</li>
+<li>
+<p>After accepting the data, the method should merge the two maps and print the total bill data for all employees.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>What you have to do</strong></p>
+<ul>
+<li>Implement the method <code>mergeEmployeeBills</code><br>
+Java documentation can be accessed at: <a href="https://docs.oracle.com/en/java/javase/11/docs/api">https://docs.oracle.com/en/java/javase/11/docs/api</a></li>
+</ul>
+<p><em>Note:</em> It has been observed that when there are several concurrent submissions, sometimes we get <code>ClassNotFoundException</code>. In this case, please refresh, try again, and try submitting multiple times.</p>
+<p>Solution:</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">// Prefix goes here</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Employee</span> <span class="token punctuation">{</span>
+    String name<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> billAmount<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Employee</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> <span class="token keyword">int</span> billAmount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>billAmount <span class="token operator">=</span> billAmount<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addBillAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> additionalBill<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>billAmount <span class="token operator">+=</span> additionalBill<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> billAmount<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Method to merge two maps of employee bills</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> <span class="token function">mergeEmployeeBills</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> billMap1<span class="token punctuation">,</span>
+                                                           Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> billMap2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> totalBills <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedHashMap</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Copy entries from the first map (preserve insertion order)</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> entry <span class="token operator">:</span> billMap1<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Employee e <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            totalBills<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>name<span class="token punctuation">,</span> e<span class="token punctuation">.</span>billAmount<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Merge/append entries from the second map</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> entry <span class="token operator">:</span> billMap2<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            String id <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Employee e2 <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>totalBills<span class="token punctuation">.</span><span class="token function">containsKey</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                totalBills<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addBillAmount</span><span class="token punctuation">(</span>e2<span class="token punctuation">.</span>billAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                totalBills<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span>e2<span class="token punctuation">.</span>name<span class="token punctuation">,</span> e2<span class="token punctuation">.</span>billAmount<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> totalBills<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> billMarch <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedHashMap</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> billApril <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedHashMap</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Read March data (3 employees)</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            String id <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            String name <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> billAmount <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            billMarch<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> billAmount<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Read April data (3 employees)</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            String id <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            String name <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> billAmount <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            billApril<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> billAmount<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Merge and print totals</span>
+        Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> totalBills <span class="token operator">=</span> <span class="token function">mergeEmployeeBills</span><span class="token punctuation">(</span>billMarch<span class="token punctuation">,</span> billApril<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Employee<span class="token operator">&gt;</span> entry <span class="token operator">:</span> totalBills<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        scanner<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Q2.<br>
+Write a Java program that, given as input name, price and stock quantity of some products, prints the filtered stream of products that have price greater than 5000.00 and stock quantity more than 10. Complete the program as specified below.</p>
+<ul>
+<li>
+<p><strong>Class Product</strong> has/should have the following members:</p>
+<ul>
+<li>
+<p>Private instance variables <code>String name</code>, <code>double price</code> and <code>int stockQuantity</code></p>
+</li>
+<li>
+<p>A constructor to initialize instance variables</p>
+</li>
+<li>
+<p>Method <code>toString</code> to print in the format shown in the test cases</p>
+</li>
+<li>
+<p>Accessor method for <code>price</code> and <code>stockQuantity</code></p>
+</li>
+<li>
+<p>Method <code>productProcessor</code> should take an <code>ArrayList&lt;Product&gt;</code> objects as input and returns a filtered stream of premium products with sufficient stock. The criteria for filtering are:</p>
+<ul>
+<li>
+<p>The price of the product is greater than 5000.00</p>
+</li>
+<li>
+<p>The stock quantity of the product is greater than 10</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Class StreamTest</strong> has the following members:</p>
+<ul>
+<li>Method <code>main</code> creates an <code>ArrayList&lt;Product&gt;</code> objects by taking input in the order <code>name, price, stockQuantity</code> then invokes the method <code>productProcessor</code> to filter premium products with sufficient stock and then display those products</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="what-you-have-to-do-2">What you have to do</h2>
+<ul>
+<li>Define method <code>productProcessor</code> in class <code>Product</code><br>
+Java documentation can be accessed at: <a href="https://docs.oracle.com/en/java/javase/11/docs/api">https://docs.oracle.com/en/java/javase/11/docs/api</a></li>
+</ul>
+<p>Solution:</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>stream<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">double</span> price<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> stockQuantity<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Product</span><span class="token punctuation">(</span>String n<span class="token punctuation">,</span> <span class="token keyword">double</span> p<span class="token punctuation">,</span> <span class="token keyword">int</span> sq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        name <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        price <span class="token operator">=</span> p<span class="token punctuation">;</span>
+        stockQuantity <span class="token operator">=</span> sq<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name <span class="token operator">+</span> <span class="token string">" - "</span> <span class="token operator">+</span> price <span class="token operator">+</span> <span class="token string">" - In Stock: "</span> <span class="token operator">+</span> stockQuantity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> price<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getStockQuantity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> stockQuantity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Stream<span class="token operator">&lt;</span>Product<span class="token operator">&gt;</span> <span class="token function">productProcessor</span><span class="token punctuation">(</span>ArrayList<span class="token operator">&lt;</span>Product<span class="token operator">&gt;</span> products<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> products<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>p <span class="token operator">-</span><span class="token operator">&gt;</span> p<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">5000.00</span> <span class="token operator">&amp;&amp;</span> p<span class="token punctuation">.</span><span class="token function">getStockQuantity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StreamTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ArrayList<span class="token operator">&lt;</span>Product<span class="token operator">&gt;</span> products <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Scanner sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Product product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Product</span><span class="token punctuation">(</span>sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> sc<span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            products<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        Stream<span class="token operator">&lt;</span>Product<span class="token operator">&gt;</span> filteredStream <span class="token operator">=</span> Product<span class="token punctuation">.</span><span class="token function">productProcessor</span><span class="token punctuation">(</span>products<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Premium Products with Sufficient Stock:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        filteredStream<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sc<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Q3.</p>
+<p>Complete the Java program to create two objects <strong>a1</strong> and <strong>a2</strong> of type <strong>Airplane</strong>.<br>
+a2 should be created from a1 using cloning such that any later changes to a2 do not affect a1.</p>
+<ul>
+<li>
+<p><strong>Class Airplane</strong> implements <code>Cloneable</code> interface and has/should have the following members:</p>
+<ul>
+<li>
+<p>Instance variables <code>String company</code>, <code>Engine eng</code>, <code>String model</code></p>
+</li>
+<li>
+<p>Constructor to initialize the instance variables</p>
+</li>
+<li>
+<p>Mutator methods as needed</p>
+</li>
+<li>
+<p>Overridden method <code>toString()</code></p>
+</li>
+<li>
+<p>Implement method <code>clone()</code> that achieves deep copy using cloning</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Class Engine</strong> implements <code>Cloneable</code> interface and has/should have the following members:</p>
+<ul>
+<li>
+<p>Instance variables <code>String name</code> and <code>int numEngines</code></p>
+</li>
+<li>
+<p>Constructor to initialize the instance variables</p>
+</li>
+<li>
+<p>Mutator methods as needed</p>
+</li>
+<li>
+<p>Overridden method <code>toString()</code></p>
+</li>
+<li>
+<p>Implement method <code>clone()</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Class AirplaneCloneTest</strong> contains the main method that takes the inputs and invokes appropriate methods to achieve the functionality.</p>
+</li>
+</ul>
+<hr>
+<h2 id="what-you-have-to-do-3">What you have to do</h2>
+<ul>
+<li>Implement method <code>clone</code> in <strong>Airplane</strong> and <strong>Engine</strong><br>
+Java documentation can be accessed at: <a href="https://docs.oracle.com/en/java/javase/11/docs/api">https://docs.oracle.com/en/java/javase/11/docs/api</a></li>
+</ul>
+<hr>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Airplane</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String company<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String model<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Engine eng<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Airplane</span><span class="token punctuation">(</span>String c<span class="token punctuation">,</span> String m<span class="token punctuation">,</span> Engine e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        company <span class="token operator">=</span> c<span class="token punctuation">;</span>
+        model <span class="token operator">=</span> m<span class="token punctuation">;</span>
+        eng <span class="token operator">=</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEngine</span><span class="token punctuation">(</span>String n<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        eng<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        eng<span class="token punctuation">.</span><span class="token function">setNumEngines</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setModel</span><span class="token punctuation">(</span>String m<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        model <span class="token operator">=</span> m<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> company <span class="token operator">+</span> <span class="token string">": "</span> <span class="token operator">+</span> model <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> eng<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Deep clone: clone Airplane and its Engine</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Airplane <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        Airplane copy <span class="token operator">=</span> <span class="token punctuation">(</span>Airplane<span class="token punctuation">)</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// shallow copy first</span>
+        copy<span class="token punctuation">.</span>eng <span class="token operator">=</span> eng<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                   <span class="token comment">// deep copy the composed Engine</span>
+        <span class="token keyword">return</span> copy<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Engine</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> numEngines<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Engine</span><span class="token punctuation">(</span>String n<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        name <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        numEngines <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        name <span class="token operator">=</span> n<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNumEngines</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        numEngines <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> numEngines<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Shallow clone is sufficient here since Engine has only primitives/immutable fields</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Engine <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>Engine<span class="token punctuation">)</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AirplaneCloneTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        Scanner sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        String company <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String model <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String engName <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> numEng <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Airplane a1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Airplane</span><span class="token punctuation">(</span>company<span class="token punctuation">,</span> model<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Engine</span><span class="token punctuation">(</span>engName<span class="token punctuation">,</span> numEng<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Airplane a2 <span class="token operator">=</span> a1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// create a2 by cloning a1 (deep copy)</span>
+
+        <span class="token comment">// Modify a2 only</span>
+        a2<span class="token punctuation">.</span><span class="token function">setModel</span><span class="token punctuation">(</span>sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        a2<span class="token punctuation">.</span><span class="token function">setEngine</span><span class="token punctuation">(</span>sc<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a1<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// should remain unaffected</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        sc<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Q4.<br>
+Write a Java program that takes an array of strings as input and attempts to convert each string to an integer. If any string cannot be converted to a valid integer (e.g., <code>abc, 12a</code>), a user-defined checked exception should be thrown.</p>
+<ul>
+<li>
+<p>Define a checked exception <strong>InvalidNumberFormatException</strong> as follows:</p>
+<ul>
+<li>Override method <code>getMessage()</code> to return the string <strong>Invalid number format</strong> (to be printed if the input contains any invalid number string).</li>
+</ul>
+</li>
+<li>
+<p><strong>Class StringToIntConverter</strong> has the following members:</p>
+<ul>
+<li>
+<p>A private instance variable <code>strArr</code> of type <code>Array</code>.</p>
+</li>
+<li>
+<p>A constructor that initializes the instance variable.</p>
+</li>
+<li>
+<p>A method <code>convertAll()</code> that attempts to convert each string in <code>strArr</code> to an integer.</p>
+<ul>
+<li>
+<p>If all strings represent valid integers, it prints <strong>All strings converted successfully</strong></p>
+</li>
+<li>
+<p>Otherwise, it throws an <strong>InvalidNumberFormatException</strong>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Class ConversionTest</strong> has the main method:</p>
+<ul>
+<li>
+<p>Accepts a fixed number of strings from input.</p>
+</li>
+<li>
+<p>Instantiates an object of <code>StringToIntConverter</code> and invokes <code>convertAll()</code>.</p>
+</li>
+<li>
+<p>If all conversions succeed, prints a success message. Otherwise, catches and prints the exception message.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="what-you-have-to-do-4">What you have to do</h2>
+<ul>
+<li>
+<p>Define class <code>InvalidNumberFormatException</code></p>
+</li>
+<li>
+<p>Define method <code>convertAll()</code></p>
+</li>
+</ul>
+<p>Java documentation can be accessed at: <a href="https://docs.oracle.com/en/java/javase/11/docs/api">https://docs.oracle.com/en/java/javase/11/docs/api</a></p>
+<p>Solution :</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">InvalidNumberFormatException</span> <span class="token keyword">extends</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Invalid number format"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">StringToIntConverter</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> strArr<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">StringToIntConverter</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>strArr <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Try converting every string to an int; throw checked exception if any fail</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">convertAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InvalidNumberFormatException <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>String s <span class="token operator">:</span> strArr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NumberFormatException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">InvalidNumberFormatException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"All strings converted successfully"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConversionTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Scanner sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// consume newline</span>
+        String<span class="token punctuation">[</span><span class="token punctuation">]</span> inputs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            inputs<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            StringToIntConverter conv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringToIntConverter</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conv<span class="token punctuation">.</span><span class="token function">convertAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InvalidNumberFormatException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        sc<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div>
+
 </div>
 	<footer style="
     position: fixed; 
